@@ -1,0 +1,15 @@
+﻿{
+  "Buyer Information": "اطلاعات خریدار",
+  "buyerFullName": "خریدار",
+  "InvoiceNo": "شماره فاکتور",
+  "OnlinePayment Details": "اطلاعات پرداخت",
+  "Order Information": "اطلاعات سفارش",
+  "Order Items": "اقلام سفارش",
+  "order_add": "سفارش جدید",
+  "OrderDateTime": "زمان ثبت سفارش",
+  "OrderNo": "شماره سفارش",
+  "orders": "سفازشات",
+  "Price Details": "Price Details",
+  "StatusCode:ApprovePayment": "پرداخت شده",
+  "StatusCode:Payment": "پرداخت نشده"
+}

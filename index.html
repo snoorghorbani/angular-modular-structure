@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="rtl" ng-app="app"  document-events ng-click="onClick($event)" ng-keyup="onKeyUp($event)" ng-class="{ 'page_loading': pageLoading, 'page_loaded': pageLoaded, 'app_initialized': appInitialized && (!$state.is('login') && !$state.includes('error'))}">
+<head>
+    <meta charset="UTF-8">
+    <title page-title ng-bind="page_title"></title>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="public/assets/img/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="public/assets/img/favicon-32x32.png" sizes="32x32">
+    <!-- uikit rtl -->
+    <link rel="stylesheet" href="public/assets/css/uikit.rtl.css" media="all">
+    <!-- flag icons -->
+    <link rel="stylesheet" href="public/assets/icons/flags/flags.min.css" media="all">
+    <!-- JS -->
+    <!-- common functions -->
+    <script src="public/assets/js/common.min.js"></script>
+    <!-- ANGULAR -->
+    <script src="public/assets/js/angular_common.min.js"></script>
+    <!-- app combined -->
+    <script src="public/assets/js/app.min.js"></script>
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="public/assets/css/main.min.css" media="all" id="main_stylesheet">
+    <!-- matchMedia polyfill for testing media queries in JS -->
+    <!--[if lte IE 9]>
+    <script type="text/javascript" src="bower_components/matchMedia/matchMedia.js"></script>
+    <script type="text/javascript" src="bower_components/matchMedia/matchMedia.addListener.js"></script>
+    <link rel="stylesheet" href="public/assets/css/ie.css" media="all">
+    <script type="text/javascript">
+        window.isLteIE9 = true;
+    </script>
+    <![endif]-->
+
+    <!-- <script src="http://localhost:3333/socket.io-client/socket.io.js"></script> -->
+
+</head>
+<body ng-controller="mainCtrl" class="{{main_theme}}" ng-class="{
+    'sidebar_main_active': primarySidebarActive && !miniSidebarActive && !topMenuActive && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_main_open': primarySidebarOpen && !miniSidebarActive && !topMenuActive && largeScreen && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_mini': miniSidebarActive && largeScreen && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_main_hiding': primarySidebarHiding,
+    'sidebar_secondary_active': secondarySidebarActive && (!$state.is('login') && !$state.includes('error')),
+    'top_bar_active': toBarActive && (!$state.is('login') && !$state.includes('error')),
+    'page_heading_active': pageHeadingActive && (!$state.is('login') && !$state.includes('error')),
+    'header_double_height': headerDoubleHeightActive && (!$state.is('login') && !$state.includes('error')),
+    'main_search_active': mainSearchActive && (!$state.is('login') && !$state.includes('error')),
+    'header_full': fullHeaderActive && (!$state.is('login') && !$state.includes('error')),
+    'boxed_layout': boxedLayoutActive && (!$state.is('login') && !$state.includes('error')),
+    'login_page': $state.is('login'),
+    'error_page': $state.includes('error'),
+    'uk-height-1-1': page_full_height,
+    'footer_active': footerActive,
+}" content-sidebar>
+
+    <div id="page_preloader" ng-hide="hidePreloader"><img src="public/assets/img/page_preloader.gif" alt="" /></div>
+    <div ui-view="main_header"></div>
+    <div ui-view id="main_view" ng-class="{'uk-height-1-1': page_full_height }"></div>
+    <div ui-view="main_sidebar" ng-hide="topMenuActive"></div>
+
+</body>
