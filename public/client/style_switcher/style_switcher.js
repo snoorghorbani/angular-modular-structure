@@ -3,7 +3,7 @@ angular
     .directive('styleSwitcher', function ($rootScope,$document,$state,$timeout) {
         return {
             restrict: 'E',
-            templateUrl : 'client/style_switcher/style_switcher.html',
+            templateUrl : 'public/client/style_switcher/style_switcher.html',
             controller: function($scope) {
 
                 $scope.themes = [

@@ -1,4 +1,4 @@
-/// <binding AfterBuild='js_all' />
+/// <binding />
 /*
 *  Admin Admin (AngularJS)
 *  Automated tasks ( http://gulpjs.com/ )
@@ -6,10 +6,13 @@
 'use strict';
 
 var gulp = require('gulp'),
+    fs = require('fs'),
     runSequence = require('run-sequence');
 
 // include all tasks from separated files (./tasks)
-require('require-dir')('./gulp-tasks');
+if (fs.existsSync('./gulp-tasks'))
+    require('require-dir')('./gulp-tasks');
+require('require-dir')('./bower_components/angular-modular-structure/gulp-tasks');
 
 /* Available tasks
 
@@ -43,16 +46,15 @@ require('require-dir')('./gulp-tasks');
  */
 
 // -------------------- PROCESS ALL JS --------------------
-gulp.task('js_all', ['js_angular_common','js_app','js_app_minify','js_common','js_minify']);
+gulp.task('js_all', ['js_angular_common', 'js_app', 'js_app_minify', 'js_common', 'js_minify']);
 
 // -------------------- PROCESS ALL LESS ------------------
-gulp.task('less_all', ['less_main','less_themes','less_my_theme','less_style_switcher']);
+gulp.task('less_all', ['less_main', 'less_themes', 'less_my_theme', 'less_style_switcher']);
 
 // -------------------- DEFAULT TASK ----------------------
-gulp.task('default', function(callback) {
+gulp.task('default', function (callback) {
     return runSequence(
-        ['js_all','less_all','json_minify'],
+        ['js_all', 'less_all', 'json_minify'],
         callback
     );
 });
-

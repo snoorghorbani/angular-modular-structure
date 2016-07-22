@@ -2945,7 +2945,7 @@ select.uk-form-width-mini {
 
 @font-face {
     font-family: 'FontAwesome';
-    src: url("../../bower_components/uikit/fonts/fontawesome-webfont.woff2") format('woff2'), url("../../bower_components/uikit/fonts/fontawesome-webfont.woff") format("woff"), url("../../bower_components/uikit/fonts/fontawesome-webfont.ttf") format("truetype");
+    src: url("../../../bower_components/uikit/fonts/fontawesome-webfont.woff2") format('woff2'), url("../../../bower_components/uikit/fonts/fontawesome-webfont.woff") format("woff"), url("../../../bower_components/uikit/fonts/fontawesome-webfont.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }

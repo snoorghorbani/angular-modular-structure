@@ -1,0 +1,14 @@
+﻿[
+  "bower_components/angular/angular.js",
+  "bower_components/angular-sanitize/angular-sanitize.js",
+  "bower_components/angular-ui-router/release/angular-ui-router.js",
+  "bower_components/oclazyload/dist/ocLazyLoad.js",
+  "client/modules/angular-retina.js",
+  "bower_components/angular-breadcrumb/dist/angular-breadcrumb.js",
+  "bower_components/angular-resource/angular-resource.min.js",
+  "bower_components/angular-localization/angular-localization.min.js",
+  "bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
+  "bower_components/angular.apiGateway/dist/angular.apiGateway.js",
+  "bower_components/angular-scopeManager/dist/angular-scopeManager.js",
+  "bower_components/sutility/dist/sutility.angular.js"
+]

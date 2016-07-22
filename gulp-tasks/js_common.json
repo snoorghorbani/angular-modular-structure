@@ -1,0 +1,18 @@
+﻿[
+  "bower_components/jquery/dist/jquery.js",
+  "bower_components/modernizr/modernizr.js",
+  "bower_components/moment/moment.js",
+  "bower_components/fastclick/lib/fastclick.js",
+  "bower_components/jquery.scrollbar/jquery.scrollbar.js",
+  "bower_components/jquery-bez/jquery.bez.min.js",
+  "bower_components/jquery.actual/jquery.actual.js",
+  "bower_components/waypoints/lib/jquery.waypoints.js",
+  "bower_components/velocity/velocity.js",
+  "bower_components/velocity/velocity.ui.js",
+  "bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js",
+  "bower_components/hammerjs/hammer.js",
+  "assets/js/custom/jquery.scrollbarWidth.js",
+  "bower_components/jquery.debouncedresize/js/jquery.debouncedresize.js",
+  "bower_components/screenfull/dist/screenfull.js",
+  "bower_components/Waves/dist/waves.min.js"
+]
