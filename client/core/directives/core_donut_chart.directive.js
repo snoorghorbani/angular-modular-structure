@@ -121,7 +121,7 @@ angular
                 priority: 1500,
                 transclude: false,
                 replace: true,
-                templateUrl: './Client/core/directives/core_donut_chart.directive.html',
+                templateUrl: 'public/Client/core/directives/core_donut_chart.directive.html',
                 require: [],
                 scope: { config: '=' },
                 controller: ['$scope', '$element', '$attrs', '$compile', 'share_module_config', "_", controller],

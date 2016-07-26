@@ -19,7 +19,7 @@ angular
                 priority: 1500,
                 transclude: false,
                 replace: false,
-                templateUrl: './Client/core/directives/core_edit_in_modal.directive.html',
+                templateUrl: 'public/Client/core/directives/core_edit_in_modal.directive.html',
                 require: [],
                 scope: false,
                 controller: ['$scope', '$element', '$attrs', '$compile', 'share_module_config', "_", controller],

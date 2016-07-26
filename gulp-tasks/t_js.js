@@ -46,59 +46,6 @@ gulp.task('js_angular_common', function () {
         .pipe(gulp.dest('public/assets/js/'));
 });
 
-// angular app minify
-gulp.task('js_app_minify', function () {
-    return gulp.src([
-            "client/*.js",
-            "client/**/*.js",
-
-            "!**/*.module.js",
-            "!**/*.provider.js",
-            "!**/*.module_config.js",
-            "!**/*.state.js",
-            "!**/*.menu.js",
-            "!**/*.api.js",
-
-            "!client/core/factories/*.js",
-            "!client/core/modules/*.js",
-            "!client/core/services/*.js",
-            "!client/core/directives/*.js",
-            "!client/core/filters/*.js",
-            "!client/core/controllers/*.js",
-
-            "!client/main_sidebar/main_sidebar_menu.service.js",
-            "!client/main_sidebar/main_sidebar.controller.js",
-            "!client/header/main_header.controller.js",
-
-            "!client/app.oc_lazy_load.js",
-
-            "!client/**/*.min.js",
-            "!client/*.min.js"
-    ], { base: './' })
-        .pipe(plugins.chmod(777))
-        .pipe(plugins.uglify({
-            mangle: false
-        }))
-        .pipe(plugins.rename({
-            extname: ".min.js"
-        }))
-        .pipe(gulp.dest('public/'));
-});
-
-gulp.task('js_copy_to_public', function () {
-    return gulp.src(global.getPath('js_copy_to_public'))
-        .pipe(plugins.removeDuplicate())
-        .pipe(plugins.chmod(777))
-        //.pipe(plugins.uglify({
-        //    mangle: false
-        //}))
-        .pipe(plugins.rename({
-            extname: ".js"
-        }))
-        .pipe(gulp.dest('public/client/'));
-});
-
-// app js
 gulp.task('js_app', function () {
     return gulp.src(global.getPath('js_app'))
         .pipe(plugins.removeDuplicate())
@@ -114,19 +61,15 @@ gulp.task('js_app', function () {
         .pipe(gulp.dest('public/assets/js/'));
 });
 
-// common/custom functions
-gulp.task('js_minify', function () {
-    return gulp.src([
-            'assets/js/custom/*.js',
-            '!assets/js/**/*.min.js'
-    ])
-        .pipe(plugins.uglify({
-            mangle: true
-        }))
+gulp.task('js_copy_to_public', function () {
+    return gulp.src(global.getPath('js_copy_to_public'))
+        .pipe(plugins.removeDuplicate())
+        .pipe(plugins.chmod(777))
+        //.pipe(plugins.uglify({
+        //    mangle: false
+        //}))
         .pipe(plugins.rename({
-            extname: ".min.js"
+            extname: ".js"
         }))
-        .pipe(gulp.dest(function (file) {
-            return file.base;
-        }));
+        .pipe(gulp.dest('public/client/'));
 });

@@ -22,7 +22,7 @@
                 priority: 1500,
                 replace: true,
                 transclude: false,
-                templateUrl: "client/core/directives/sn_open_modal.directive.html",
+                templateUrl: "public/client/core/directives/sn_open_modal.directive.html",
                 require: [],
                 scope: false,
                 controller: ['$scope', '$element', '$attrs', '$compile', 'share_module_config', "_", controller],

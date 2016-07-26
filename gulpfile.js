@@ -6,7 +6,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-    fs = require('fs'),
+    fs= require('fs'),
     runSequence = require('run-sequence');
 
 // include all tasks from separated files (./tasks)
@@ -40,21 +40,25 @@ require('require-dir')('./bower_components/angular-modular-structure/gulp-tasks'
         // proxy - Proxy an EXISTING vhost (localserver/remote server address)
         // host - Override host detection (your server ip)
 
-    BUILD (t_build.js)
-        gulp build - build _dist folder (minified js/css/json)
-
  */
 
 // -------------------- PROCESS ALL JS --------------------
-gulp.task('js_all', ['js_angular_common', 'js_app', 'js_app_minify', 'js_common', 'js_minify']);
+gulp.task('js_all', ['js_angular_common', 'js_app', 'js_app_minify', 'js_common', 'js_minify', 'js_copy_to_public']);
 
 // -------------------- PROCESS ALL LESS ------------------
 gulp.task('less_all', ['less_main', 'less_themes', 'less_my_theme', 'less_style_switcher']);
 
+// -------------------- PROCESS ALL HTML ------------------
+gulp.task('html_all', ['html_copy_to_public']);
+
+// -------------------- PROCESS ALL JSON ------------------
+gulp.task('json_all', ['json_minify']);
+
 // -------------------- DEFAULT TASK ----------------------
 gulp.task('default', function (callback) {
     return runSequence(
-        ['js_all', 'less_all', 'json_minify'],
+        ['js_all', 'html_all', 'less_all', 'json_all'],
         callback
     );
 });
+

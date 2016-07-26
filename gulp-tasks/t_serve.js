@@ -1,45 +1,55 @@
-// -------------------- BROWSER SYNC http://www.browsersync.io/docs/ --------------------
 'use strict';
 
 var gulp = require('gulp'),
-    // browser sync
+    global = require('./global.js'),
     bs_angular = require('browser-sync').create('bs_angular');
 
-
-gulp.task('serve', ['default'], function() {
+gulp.task('serve', ['default'], function () {
 
     bs_angular.init({
-        // http://www.browsersync.io/docs/options/#option-host
         host: "10.0.0.188",
-        // http://www.browsersync.io/docs/options/#option-proxy
-        proxy: "admin_app_rtl.local",
-        // http://www.browsersync.io/docs/options/#option-port
-        port: 3044,
-        // http://www.browsersync.io/docs/options/#option-notify
+        proxy: "localhost:20466",
+        port: 3000,
         notify: true,
         ui: {
             port: 3043
         }
     });
 
-    gulp.watch('public/client/*.js', ['js_app']);
+    //#region js
+    gulp.watch(global.getPath('js_common'), ['js_common']);
+    gulp.watch(global.getPath('js_angular_common'), ['js_angular_common']);
+    gulp.watch(global.getPath('js_app'), ['js_app']);
+    gulp.watch(global.getPath('html_copy_to_public'), ['html_copy_to_public']);
     gulp
-        .watch('assets/js/admin_app.min.js')
+        .watch(['public/assets/js/angular_common.js',
+            'public/assets/js/app.js',
+            'public/assets/js/common.js',
+            'public/client/**/*.js'
+        ])
+        .on('change', bs_angular.reload);
+    //#endregion
+
+    //#region JSON
+    gulp.watch(global.getPath('json_minify'), ['json_minify']);
+    gulp
+        .watch('public/languages/**/*.json')
         .on('change', bs_angular.reload);
 
-    gulp.watch('assets/less/**/*.less', ['less_main']);
+    //#endregion
+
+    //#region css
+    gulp.watch('public/assets/less/**/*.less', ['less_main']);
     gulp
-        .watch('assets/css/main.min.css')
-        .on('change', function() {
-            bs_angular.reload("assets/css/main.min.css")
+        .watch('public/assets/css/main.css')
+        .on('change', function () {
+            bs_angular.reload("public/assets/css/main.css")
         });
+    //#endregion
 
     gulp
         .watch([
-            'index.html',
-            'client/**/*',
-            '!client/**/*.min.js'
+            'public/client/**/*.html'
         ])
         .on('change', bs_angular.reload);
-
 });

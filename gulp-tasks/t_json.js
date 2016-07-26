@@ -2,6 +2,7 @@
 'use strict';
 
 var gulp = require('gulp'),
+    global = require('./global.js'),
     plugins = require("gulp-load-plugins")({
         pattern: ['gulp-*', 'gulp.*'],
         replaceString: /\bgulp[\-.]/
@@ -11,18 +12,15 @@ var gulp = require('gulp'),
     chalk_error = chalk.bold.red;
 
 
-gulp.task('json_minify', function() {
-    return gulp.src([
-            'data/*.json',
-            '!data/*.min.json'
-        ])
+gulp.task('json_minify', function () {
+    return gulp.src(global.getPath("json_minify"))
         .pipe(plugins.jsonminify())
-        .on('error', function(err) {
+        .on('error', function (err) {
             console.log(chalk_error(err.message));
             this.emit('end');
         })
         .pipe(plugins.rename({
-            extname: ".min.json"
+            extname: ".json"
         }))
-        .pipe(gulp.dest('data/'));
+        .pipe(gulp.dest('public/languages'));
 });
