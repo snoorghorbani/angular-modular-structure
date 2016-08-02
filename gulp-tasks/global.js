@@ -1,10 +1,26 @@
 /// <reference path="../bower_components/moment-jalaali-master/build/moment-jalaali.js" />
 // -------------------- MINIFY/CONCATENATE JS FILES --------------------
 'use strict';
+var fs = require('fs');
+var themeBowerManifest = require('../bower.json');
+var generatorConfig = fs.readFileSync('./.yo-rc.json');
+generatorConfig = JSON.parse(generatorConfig);
+var bowerConfig = fs.readFileSync('./.bowerrc');
+bowerConfig = JSON.parse(bowerConfig)
+
+
+var get_gen_conf = function (name) {
+    return generatorConfig["generator-ams"][name];
+}
+var get_theme_bower_path = function () {
+    return [bowerConfig.directory, themeBowerManifest.name,''].join('/');
+}
 
 module.exports = {
-    themePath: 'bower_components/angular-modular-structure/',
-    getPath : function (taskName) {
+    get_gen_conf: get_gen_conf,
+    bowerDir: get_gen_conf(),
+    themePath: get_theme_bower_path(),
+    getPath: function (taskName) {
         var res = [];
         var cleardPath;
         var isIgnorePath = false;
@@ -21,7 +37,7 @@ module.exports = {
             res.push(path);
             res.push(((isIgnorePath) ? '!' : '') + this.themePath + cleardPath);
         }
-        console.log(res)
+
         return res;
-    }
+    },
 }
