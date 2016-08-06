@@ -40,7 +40,7 @@ app
                         name: 'lazy_autosize',
                         files: [
                             'bower_components/autosize/dist/autosize.min.js',
-                            'public/client/modules/angular-autosize.js'
+                            'public/angular-autosize.js'
                         ],
                         serie: true
                     },
@@ -48,7 +48,7 @@ app
                         name: 'lazy_iCheck',
                         files: [
                             "bower_components/iCheck/icheck.min.js",
-                            'public/client/modules/angular-icheck.js'
+                            'public/angular-icheck.js'
                         ],
                         serie: true
                     },
@@ -56,7 +56,7 @@ app
                         name: 'lazy_selectizeJS',
                         files: [
                             'bower_components/selectize/dist/js/standalone/selectize.min.js',
-                            'public/client/modules/angular-selectize.js'
+                            'public/angular-selectize.js'
                         ],
                         serie: true
                     },
@@ -64,7 +64,7 @@ app
                         name: 'lazy_switchery',
                         files: [
                             'bower_components/switchery/dist/switchery.min.js',
-                            'public/client/modules/angular-switchery.js'
+                            'public/angular-switchery.js'
                         ],
                         serie: true
                     },
@@ -72,7 +72,7 @@ app
                         name: 'lazy_ionRangeSlider',
                         files: [
                             'bower_components/ion.rangeslider/js/ion.rangeSlider.min.js',
-                            'public/client/modules/angular-ionRangeSlider.js'
+                            'public/angular-ionRangeSlider.js'
                         ],
                         serie: true
                     },
@@ -85,7 +85,7 @@ app
                     {
                         name: 'lazy_character_counter',
                         files: [
-                            'public/client/modules/angular-character-counter.js'
+                            'public/angular-character-counter.js'
                         ]
                     },
                     {
@@ -108,7 +108,7 @@ app
                         name: 'lazy_ckeditor',
                         files: [
                             'bower_components/ckeditor/ckeditor.js',
-                            'public/client/modules/angular-ckeditor.js'
+                            'public/angular-ckeditor.js'
                         ],
                         serie: true
                     },
@@ -116,7 +116,7 @@ app
                         name: 'lazy_tinymce',
                         files: [
                             'bower_components/tinymce/tinymce.min.js',
-                            'public/client/modules/angular-tinymce.js'
+                            'public/angular-tinymce.js'
                         ],
                         serie: true
                     },
@@ -127,7 +127,7 @@ app
                         files: [
                             'bower_components/chartist/dist/chartist.min.css',
                             'bower_components/chartist/dist/chartist.min.js',
-                            'public/client/modules/angular-chartist.js'
+                            'public/angular-chartist.js'
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
@@ -144,7 +144,7 @@ app
                             'bower_components/metrics-graphics/dist/metricsgraphics.css',
                             'bower_components/d3/d3.min.js',
                             'bower_components/metrics-graphics/dist/metricsgraphics.min.js',
-                            'public/client/metrics_graphics/directives/metrics-graphics.js'
+                            'public/metrics-graphics.js'
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
@@ -164,7 +164,7 @@ app
                         name: 'lazy_charts_peity',
                         files: [
                             'bower_components/peity/jquery.peity.min.js',
-                            'public/client/modules/angular-peity.js'
+                            'public/angular-peity.js'
                         ],
                         serie: true
                     },
@@ -174,7 +174,7 @@ app
                         name: 'lazy_countUp',
                         files: [
                             'bower_components/countUp.js/dist/countUp.min.js',
-                            'public/client/modules/angular-countUp.js'
+                            'public/angular-countUp.js'
                         ],
                         serie: true
                     },
@@ -209,7 +209,7 @@ app
                             "bower_components/prism/prism.js",
                             "bower_components/prism/components/prism-php.js",
                             "bower_components/prism/plugins/line-numbers/prism-line-numbers.js",
-                            'public/client/modules/angular-prism.js'
+                            'public/angular-prism.js'
                         ],
                         serie: true
                     },
@@ -259,7 +259,7 @@ app
                             "bower_components/codemirror/mode/php/php.js",
                             "bower_components/codemirror/mode/clike/clike.js",
                             "bower_components/codemirror/mode/javascript/javascript.js",
-                            "public/client/modules/angular-codemirror.js"
+                            "public/angular-codemirror.js"
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
@@ -413,7 +413,7 @@ app
                         name: 'lazy_style_switcher',
                         files: [
                             "public/assets/css/style_switcher.min.css",
-                            "public/client/style_switcher/style_switcher.js"
+                            "public/style_switcher.js"
                         ],
                         insertBefore: '#main_stylesheet',
                     }

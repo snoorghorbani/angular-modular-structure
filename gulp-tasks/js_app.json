@@ -1,5 +1,5 @@
 ﻿[
-  "client/core/*.module.js",
+  "client/app/*.module.js",
 
   "client/**/*.module.js",
   "client/**/*.provider.js",
@@ -8,12 +8,12 @@
   "client/**/*.menu.js",
   "client/**/*.api.js",
 
-  "client/core/factories/*.js",
-  "client/core/modules/*.js",
-  "client/core/services/*.js",
-  "client/core/directives/*.js",
-  "client/core/filters/*.js",
-  "client/core/controllers/*.js",
+  "client/app/factories/*.js",
+  "client/app/modules/*.js",
+  "client/app/services/*.js",
+  "client/app/directives/*.js",
+  "client/app/filters/*.js",
+  "client/app/controllers/*.js",
 
   "client/main_sidebar/main_sidebar_menu.service.js",
   "client/main_sidebar/main_sidebar.controller.js",

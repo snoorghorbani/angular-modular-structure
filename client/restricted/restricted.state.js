@@ -7,15 +7,15 @@ angular.module('restricted')
                     url: "",
                     views: {
                         'main_header': {
-                            templateUrl: 'public/client/header/header.template.html',
+                            templateUrl: 'public/header.template.html',
                             controller: 'main_header.controller'
                         },
                         'main_sidebar': {
-                            templateUrl: 'public/client/main_sidebar/main_sidebar.template.html',
+                            templateUrl: 'public/main_sidebar.template.html',
                             controller: 'main_sidebar.controller'
                         },
                         '': {
-                            templateUrl: 'public/client/restricted/restricted.template.html'
+                            templateUrl: 'public/restricted.template.html'
                         }
                     },
                     resolve: {
@@ -28,7 +28,7 @@ angular.module('restricted')
                                 'lazy_autosize',
                                 'lazy_iCheck',
                                 'lazy_themes',
-                                'public/client/shortcuts/shortcuts.service.js',
+                                'public/shortcuts.service.js',
                                 'lazy_style_switcher'
                             ]);
                         }]

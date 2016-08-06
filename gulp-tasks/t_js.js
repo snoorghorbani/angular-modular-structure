@@ -68,8 +68,6 @@ gulp.task('js_copy_to_public', function () {
         //.pipe(plugins.uglify({
         //    mangle: false
         //}))
-        .pipe(plugins.rename({
-            extname: ".js"
-        }))
-        .pipe(gulp.dest('public/client/'));
+        .pipe(plugins.rename({ dirname: '' }))
+        .pipe(gulp.dest('public/'));
 });

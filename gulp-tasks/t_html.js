@@ -14,5 +14,6 @@ gulp.task('html_copy_to_public', function () {
     return gulp.src(global.getPath('html_copy_to_public'))
         .pipe(plugins.removeDuplicate())
         .pipe(plugins.chmod(777))
-        .pipe(gulp.dest('public/client/'));
+        .pipe(plugins.rename({ dirname: '' }))
+        .pipe(gulp.dest('public/'));
 });

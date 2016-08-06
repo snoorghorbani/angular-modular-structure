@@ -48,9 +48,10 @@ gulp.task('serve', ['default'], function () {
         });
     //#endregion
 
+    gulp.watch('public/client/**/*.html', ['html_copy_to_public']);
     gulp
         .watch([
-            'public/client/**/*.html'
+            'public/*.html'
         ])
         .on('change', bs_angular.reload);
 });

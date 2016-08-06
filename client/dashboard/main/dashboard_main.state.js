@@ -7,7 +7,7 @@ angular.module('dashboard')
             $stateProvider
 				.state("restricted.dashboard.main", {
 					url: "/main",
-					templateUrl: 'client/dashboard/main/dashboard_main.template.html',
+					templateUrl: 'public/dashboard_main.template.html',
 					controller: 'dashboard_main.controller',
 					resolve: {
 						deps: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -20,7 +20,7 @@ angular.module('dashboard')
                                 'lazy_weathericons',
                                 'lazy_google_maps',
                                 'lazy_clndr',
-                                'public/client/dashboard/main/dashboard_main.controller.js'
+                                'public/dashboard_main.controller.js'
 							], { serie: true });
 						}],
 						sale_chart_data: function($http){
