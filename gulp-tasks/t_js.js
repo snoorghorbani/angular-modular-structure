@@ -20,6 +20,7 @@ gulp.task('js_common', function () {
             console.log(chalk_error(err.message));
             this.emit('end');
         })
+        .pipe(plugins.chmod(777))
         .pipe(gulp.dest('public/assets/js/'))
         //.pipe(plugins.uglify({
         //    mangle: true
@@ -28,6 +29,7 @@ gulp.task('js_common', function () {
         .pipe(plugins.size({
             showFiles: true
         }))
+        .pipe(plugins.chmod(777))
         .pipe(gulp.dest('public/assets/js/'));
 });
 

@@ -2,6 +2,11 @@
 // -------------------- MINIFY/CONCATENATE JS FILES --------------------
 'use strict';
 var fs = require('fs');
+var gulp = require('gulp'),
+    plugins = require("gulp-load-plugins")({
+        pattern: ['gulp-*', 'gulp.*'],
+        replaceString: /\bgulp[\-.]/
+    });
 var themeBowerManifest = require('../bower.json');
 var generatorConfig = fs.readFileSync('./.yo-rc.json');
 generatorConfig = JSON.parse(generatorConfig);
@@ -13,7 +18,7 @@ var get_gen_conf = function (name) {
     return generatorConfig["generator-ams"][name];
 }
 var get_theme_bower_path = function () {
-    return [bowerConfig.directory, themeBowerManifest.name,''].join('/');
+    return [bowerConfig.directory, themeBowerManifest.name, ''].join('/');
 }
 
 module.exports = {
@@ -41,3 +46,20 @@ module.exports = {
         return res;
     },
 }
+
+//gulp.task('remove-read-only-attr', function () {
+//    return gulp.src(['public/**/*'], { base: 'public', read: false })
+//        .pipe(plugins.chmod(777))
+//        .pipe(gulp.dest('/public'));
+//});
+gulp.task('clean-scripts', function () {
+    return gulp.src([
+        'public/assets/js/angular_common.js',
+        'public/assets/js/angular_common.min.js',
+        'public/assets/js/app.js',
+        'public/assets/js/app.min.js',
+        'public/assets/js/common.js',
+        'public/assets/js/common.min.js'
+        ], { read: false })
+      .pipe(plugins.clean());
+});
