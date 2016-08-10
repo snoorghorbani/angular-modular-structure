@@ -1,0 +1,19 @@
+{
+  "generator-ams": {
+    "directory": "Client",
+    "postGuplTask": "js_app",
+    "metadata_list_route": "MetadataList",
+    "url": "http://localhost:3456",
+    "main_module": "states",
+    "languages_directory": "./languages",
+    "t_serve": {
+      "host": "10.0.0.188",
+      "proxy": "localhost:3456",
+      "port": 4567,
+      "notify": true,
+      "ui": {
+        "port": 3043
+      }
+    }
+  }
+}
