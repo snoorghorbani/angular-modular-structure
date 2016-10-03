@@ -57,7 +57,7 @@
 
                             }
                         }
-                    
+
                         var i18nPath = attrs.i18nPath || 'common',
                             value = attrs.value,
                             customClass = attrs.class || '',
@@ -117,6 +117,12 @@
                                     var undefined_field = _.filter(new_value, function (i) { return _.is.undefined(i) });
                                     var empty_field = _.filter(new_value, function (i) { return !i || i.length === 0 });
                                     if (empty_field.length === 0 && undefined_field.length === 0) {
+
+                                        debugger;
+                                        _.each(required_properties, function (item, idx) {
+                                            _.setValue($scope.optionsAction, new_value[idx], item.substr(6));
+                                        });
+
                                         $scope.optionsAction.$invoke();
                                     }
                                     else {

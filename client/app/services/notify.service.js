@@ -1,5 +1,7 @@
 ﻿app.service('notifyService', ['_', 'locale', function (_, locale) {
     var localize_then_show_message = function (type, textOrTitle, text, timeout, clickHandler, bodyOutputType) {
+        if ('success,info'.indexOf(type) > -1) return;
+
         var i18n = {
             path: 'common',
             text: ''

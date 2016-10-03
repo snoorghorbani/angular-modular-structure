@@ -1,5 +1,5 @@
 angular
-    .module('user')
+    .module('login')
     .controller('loginCtrl', [
         '$scope',
         '$rootScope',
@@ -9,14 +9,15 @@ angular
         function ($scope, $rootScope, $state, utils, authentication) {
             $scope.user = {};
             $scope.autehnticate = function () {
-                authentication
-                    .authenticate($scope.user)
-                    .then(function () {
-                        //TODO clear rootscope, manage these
-                        var returnToState = ($rootScope.returnToState && $rootScope.returnToState.name) || 'restricted.dashboard.main';
-                        $rootScope.returnToStateParams = $rootScope.returnToStateParams || {};
-                        $state.go(returnToState, $rootScope.returnToStateParams);
-                    });
+				return true;
+                // authentication
+                    // .authenticate($scope.user)
+                    // .then(function () {
+                        // //TODO clear rootscope, manage these
+                        // var returnToState = ($rootScope.returnToState && $rootScope.returnToState.name) || 'restricted.dashboard.main';
+                        // $rootScope.returnToStateParams = $rootScope.returnToStateParams || {};
+                        // $state.go(returnToState, $rootScope.returnToStateParams);
+                    // });
             }
 
 

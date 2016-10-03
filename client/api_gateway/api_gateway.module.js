@@ -6,7 +6,7 @@ angular.module('api_gateway', [
     .constant('constants', {})
     .config(function () { })
     .run(function ($rootScope, apiGateway) {
-        $rootScope.$$$api = apiGateway.init();
+        window.$$$api = $rootScope.$$$api = apiGateway.init();
     });
 
 // dynamically register module in application (states module)

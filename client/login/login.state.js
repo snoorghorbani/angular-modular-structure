@@ -2,23 +2,18 @@
     .config(
         function ($stateProvider, $urlRouterProvider) {
             $stateProvider
-                .state("user.login", {
+                .state("login", {
                     url: "/login",
-                    templateUrl: 'public/client/user/login/user_login.template.html',
+                    templateUrl: 'client/login/login.template.html',
                     controller: 'loginCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_uikit',
-                                'lazy_parsleyjs',
                                 'lazy_iCheck',
-                                'public/client/user/login/user_login.controller.js'
+                                'client/login/login.controller.js'
                             ]);
                         }]
-                    },
-                    data: {
-                        pageTitle: 'Login',
-                        roles: []
                     }
                 });
         })

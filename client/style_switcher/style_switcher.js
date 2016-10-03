@@ -1,4 +1,4 @@
-angular
+﻿angular
     .module('app')
     .directive('styleSwitcher', function ($rootScope,$document,$state,$timeout) {
         return {
@@ -148,7 +148,7 @@ angular
                 if(localStorage.getItem("admin_theme") !== null) {
                     $rootScope.main_theme = localStorage.getItem("admin_theme");
                 } else {
-                    $rootScope.main_theme = "app_theme_g"
+                    $rootScope.main_theme = "default_theme";
                 }
 
             }

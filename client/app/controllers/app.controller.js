@@ -15,8 +15,6 @@ angular
             $rootScope.$scopeManager = scopeManager;
             $rootScope.$$$notify = notifyService;
             $rootScope.$$$models = {};
-            $rootScope.$$$debugMode = true;
-
         }
     ])
 ;

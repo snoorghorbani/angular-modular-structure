@@ -19,7 +19,7 @@
  *              .notification(message);
  **/
 angular
-    .module('user')
+    .module('login')
         .run(['apiGateway', function (apiGateway) {
 
             apiGateway
@@ -27,7 +27,7 @@ angular
                 .action("Authenticate")
                 .type('POST')
                 .schema({
-                    "AccountName": { "required": true },
+                    "AccountName": { "IsRequired": true },
                     "Password": {},
                     "Result": {
                         "AccountName": {},

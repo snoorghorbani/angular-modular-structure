@@ -12,8 +12,7 @@ var gulp = require('gulp'),
 // include all tasks from separated files (./tasks)
 if (fs.existsSync('./gulp-tasks'))
     require('require-dir')('./gulp-tasks');
-if (fs.existsSync('./bower_components/angular-modular-structure/gulp-tasks'))
-	require('require-dir')('./bower_components/angular-modular-structure/gulp-tasks');
+require('require-dir')('./bower_components/angular-modular-structure/gulp-tasks');
 
 /* Available tasks
 

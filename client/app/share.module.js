@@ -5,7 +5,7 @@
     .config(function () { })
     .value("share_module_config", {
         show_$id: false,
-        debug_mode: false
+        debug_mode: true
     })
     .constant('constants', {})
     .run(function () { });

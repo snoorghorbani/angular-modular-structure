@@ -3,53 +3,53 @@ angular
         .config(function (apiGatewayProvider) {
             apiGatewayProvider.set_data_type_schema({
                 "Password": {
-                    "Type": "Password",
-                    "IsRequired": true,
-                    "MinLength": 6
+                    "type": "Password",
+                    "required": true,
+                    "minLength": 6
                 },
                 "EmailAddress": {
-                    "Type": "email"
+                    "type": "email"
                 },
                 "PagingInfo": {
                     "PageNo": {
-                        "Type": "number",
-                        "IsRequired": true,
-                        "Default": 1
+                        "type": "number",
+                        "required": true,
+                        "default": 1
                     },
                     "PageSize": {
-                        "Type": "number",
-                        "IsRequired": true,
-                        "Default": 5
+                        "type": "number",
+                        "required": true,
+                        "default": 5
                     }
                 },
                 "SortingInfo": {
                     "FieldName": {
-                        "InputType": "select",
-                        "IsRequired": true,
-                        "Default": "ProductName",
+                        "inputType": "select",
+                        "required": true,
+                        "default": "ProductName",
                         "options": ["ProductName", "TotalSoldNumber"]
                     },
                     "Direction": {
-                        "Type": "select",
-                        "IsRequired": true,
-                        "Default": "ASC",
+                        "type": "select",
+                        "required": true,
+                        "default": "ASC",
                         "options": ["ASC", "DESC"]
                     }
                 },
                 "Period": {
                     "Start": {
-                        "Type": "date",
-                        "InputType": "mask",
-                        "Pattern": "(13)\\d{2}\\/(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2\\d|3[01])",
-                        "IsRequired": true,
-                        "Default": "1390/1/1"
+                        "type": "date",
+                        "inputType": "mask",
+                        "pattern": "(13)\\d{2}\\/(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2\\d|3[01])",
+                        "required": true,
+                        "default": "1390/1/1"
                     },
                     "End": {
-                        "Type": "date",
-                        "InputType": "mask",
-                        "Pattern": "(13)\\d{2}\\/(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2\\d|3[01])",
-                        "IsRequired": true,
-                        "Default": "1399/12/12"
+                        "type": "date",
+                        "inputType": "mask",
+                        "pattern": "(13)\\d{2}\\/(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2\\d|3[01])",
+                        "required": true,
+                        "default": "1399/12/12"
                     }
                 },
                 "PriceComponent": {
@@ -65,6 +65,11 @@ angular
                 "OnlinePayment": {
                     "TransactionRefrenceId": {},
                     "PaymentDateTime": {}
+                },
+                "ExpiryDateTime": {
+                    "type": "date",
+                    "inputType": "mask",
+                    "pattern": "(13)\\d{2}\\/(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2\\d|3[01])",
                 }
             });
         });

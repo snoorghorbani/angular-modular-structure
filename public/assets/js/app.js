@@ -169,7 +169,8 @@ angular.module('states', [
     'restricted',
     'authentication',
     'authorization',
-    'user'
+    'user',
+    'login'
 ])
     .value('values', {})
     .constant('constants', {})
@@ -244,14 +245,6 @@ angular.module('authorization')
         }])
 ;
 
-angular.module('dashboard', [])
-    .value('values', {})
-    .constant('constants', {})
-    .config(function () { })
-    .run(function () { });
-
-// dynamically register module in application (states module)
-angular.module('states').requires.push('dashboard');
 angular
     .module("ConsoleLogger", [])
     // router.ui debug
@@ -298,6 +291,14 @@ angular
         }
     ])
 ;
+angular.module('dashboard', [])
+    .value('values', {})
+    .constant('constants', {})
+    .config(function () { })
+    .run(function () { });
+
+// dynamically register module in application (states module)
+angular.module('states').requires.push('dashboard');
 angular.module('error', [])
     .value('values', {})
     .constant('constants', {})
@@ -323,14 +324,6 @@ angular
 
 // dynamically register module in application ([object Object] module)
 angular.module('share').requires.push('metrics_graphics');
-angular.module('restricted', [])
-    .value('values', {})
-    .constant('constants', {})
-    .run(function () { });
-
-// dynamically register module in application (states module)
-angular.module('states').requires.push('restricted');
-;
 angular.module('personalize', [])
     .value('values', {})
     .constant('constants', {})
@@ -339,14 +332,14 @@ angular.module('personalize', [])
 
 // dynamically register module in application (states module)
 angular.module('third_parties').requires.push('personalize');
-angular.module('shortcuts', [])
+angular.module('restricted', [])
     .value('values', {})
     .constant('constants', {})
-    .config(function () { })
     .run(function () { });
 
 // dynamically register module in application (states module)
-angular.module('states').requires.push('shortcuts');
+angular.module('states').requires.push('restricted');
+;
 angular.module('socket', [])
     .value('values', {})
     .constant('constants', {})
@@ -355,6 +348,14 @@ angular.module('socket', [])
 
 // dynamically register module in application (states module)
 angular.module('third_parties').requires.push('socket');
+angular.module('shortcuts', [])
+    .value('values', {})
+    .constant('constants', {})
+    .config(function () { })
+    .run(function () { });
+
+// dynamically register module in application (states module)
+angular.module('states').requires.push('shortcuts');
 ;
 angular.module('user', [])
     .value('values', {})
@@ -801,13 +802,13 @@ angular
             socketProvider.set_event('login_succeed', 'login');
         }])
 ;
-angular
-    .module('user')
-        .config(["authenticationProvider", "user.serviceProvider",
-            function (authentication, user_service) {
-                authentication.register_authentication_provider("user.service");
-            }])
-;
+//angular
+//    .module('user')
+////        .config(["authenticationProvider", "user.serviceProvider",
+////            function (authentication, user_service) {
+////                authentication.register_authentication_provider("user.service");
+////            }])
+////;
 angular.module('restricted')
     .config(
         function ($stateProvider, $urlRouterProvider) {
@@ -857,6 +858,26 @@ angular.module('error', [])
 
         })
 ;
+angular.module('login', [])
+    .config(
+        function ($stateProvider, $urlRouterProvider) {
+            $stateProvider
+                .state("login", {
+                    url: "/login",
+                    templateUrl: 'client/login/login.template.html',
+                    controller: 'loginCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_uikit',
+                                'lazy_iCheck',
+                                'client/login/login.controller.js'
+                            ]);
+                        }]
+                    }
+                });
+        })
+;
 angular.module('restricted')
     .config(
         function ($stateProvider, $urlRouterProvider) {
@@ -866,15 +887,15 @@ angular.module('restricted')
                     url: "",
                     views: {
                         'main_header': {
-                            templateUrl: 'public/header.template.html',
+                            templateUrl: 'public/client/header/header.template.html',
                             controller: 'main_header.controller'
                         },
                         'main_sidebar': {
-                            templateUrl: 'public/main_sidebar.template.html',
+                            templateUrl: 'public/client/main_sidebar/main_sidebar.template.html',
                             controller: 'main_sidebar.controller'
                         },
                         '': {
-                            templateUrl: 'public/restricted.template.html'
+                            templateUrl: 'public/client/restricted/restricted.template.html'
                         }
                     },
                     resolve: {
@@ -887,7 +908,7 @@ angular.module('restricted')
                                 'lazy_autosize',
                                 'lazy_iCheck',
                                 'lazy_themes',
-                                'public/shortcuts.service.js',
+                                'public/client/shortcuts/shortcuts.service.js',
                                 'lazy_style_switcher'
                             ]);
                         }]
@@ -926,7 +947,7 @@ angular.module('dashboard')
             $stateProvider
 				.state("restricted.dashboard.main", {
 					url: "/main",
-					templateUrl: 'public/dashboard_main.template.html',
+					templateUrl: 'client/dashboard/main/dashboard_main.template.html',
 					controller: 'dashboard_main.controller',
 					resolve: {
 						deps: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -939,7 +960,7 @@ angular.module('dashboard')
                                 'lazy_weathericons',
                                 'lazy_google_maps',
                                 'lazy_clndr',
-                                'public/dashboard_main.controller.js'
+                                'public/client/dashboard/main/dashboard_main.controller.js'
 							], { serie: true });
 						}],
 						sale_chart_data: function($http){
@@ -963,13 +984,13 @@ angular.module('dashboard')
 				})
 			})
 ;
-angular.module('user')
+angular.module('login', [])
     .config(
         function ($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state("user.login", {
                     url: "/login",
-                    templateUrl: 'public/user_login.template.html',
+                    templateUrl: 'public/client/user/login/user_login.template.html',
                     controller: 'loginCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -977,7 +998,7 @@ angular.module('user')
                                 'lazy_uikit',
                                 'lazy_parsleyjs',
                                 'lazy_iCheck',
-                                'public/user_login.controller.js'
+                                'public/client/user/login/user_login.controller.js'
                             ]);
                         }]
                     },
@@ -1143,7 +1164,7 @@ angular
  *              .notification(message);
  **/
 angular
-    .module('user')
+    .module('login')
         .run(['apiGateway', function (apiGateway) {
 
             apiGateway
@@ -1151,7 +1172,7 @@ angular
                 .action("Authenticate")
                 .type('POST')
                 .schema({
-                    "AccountName": { "required": true },
+                    "AccountName": { "IsRequired": true },
                     "Password": {},
                     "Result": {
                         "AccountName": {},
@@ -2736,7 +2757,7 @@ app
     ])
 ;
 angular
-    .module('share')
+    .module('core')
         .directive('donutChart', ['$compile', '$window', '_', 'locale', function ($compile, $window, _, locale) {
             var counter = 0;
             var ID_PREFIX = "donut_cahrt_"
@@ -2858,7 +2879,7 @@ angular
                 priority: 1500,
                 transclude: false,
                 replace: true,
-                templateUrl: 'public/core_donut_chart.directive.html',
+                templateUrl: './Client/core/directives/core_donut_chart.directive.html',
                 require: [],
                 scope: { config: '=' },
                 controller: ['$scope', '$element', '$attrs', '$compile', 'share_module_config', "_", controller],
@@ -2877,7 +2898,7 @@ angular
 
         }]);
 angular
-    .module('share')
+    .module('core')
         .directive('snEditItemInModal', ['$compile', function ($compile) {
             var controller = function ($scope, element, attrs, $compile, share_module_config, _) { };
             var compiling = function ($templateElement, $templateAttributes) { };
@@ -2897,7 +2918,7 @@ angular
                 priority: 1500,
                 transclude: false,
                 replace: false,
-                templateUrl: 'public/core_edit_in_modal.directive.html',
+                templateUrl: './Client/core/directives/core_edit_in_modal.directive.html',
                 require: [],
                 scope: false,
                 controller: ['$scope', '$element', '$attrs', '$compile', 'share_module_config', "_", controller],
@@ -2914,8 +2935,7 @@ angular
 
             //#endregion
 
-        }])
-;
+        }]);
 angular
     .module('share')
         .directive('snInfinite', ['$compile', function ($compile) {
@@ -3161,15 +3181,15 @@ angular
 
                                 if ("type" in attrs) {
                                     $scope.primaryType = attrs.type;
-                                    res = map_type_to_html_type(attrs.type);
+                                    map_type_to_html_type(attrs.type);
                                 }
-                                else if (item_schema && "inputType" in item_schema) {
-                                    $scope.primaryType = item_schema["inputType"];
-                                    res = map_type_to_html_type(item_schema["inputType"]);
+                                else if (item_schema && "InputType" in item_schema) {
+                                    $scope.primaryType = item_schema["InputType"];
+                                    res = map_type_to_html_type(item_schema["InputType"]);
                                 }
-                                else if (item_schema && "type" in item_schema) {
-                                    $scope.primaryType = item_schema["type"];
-                                    res = map_type_to_html_type(item_schema["type"]);
+                                else if (item_schema && "Type" in item_schema) {
+                                    $scope.primaryType = item_schema["Type"];
+                                    res = map_type_to_html_type(item_schema["Type"]);
                                 } else {
                                     var mapped = map_by_name(attrs.ngModel);
                                     $scope.primaryType = mapped || 'text';
@@ -3223,7 +3243,7 @@ angular
 
                         //#region config from directive attribute and model schema
 
-                        var configurableAttrs = { 'required': { schema: 'required' }, 'readonly': { schema: 'readonly' }, 'min': { schema: 'min' }, 'max': { schema: 'max' }, 'maxlength': { schema: 'maxLength' }, 'minlength': { schema: 'minLength' }, 'parsleyPattern': { schema: 'pattern', dataAttr: true }, 'inputmask': { schema: 'inputmask', dataAttr: true }, 'inputmaskShowmaskonhover': { schema: 'inputmaskShowmaskonhover', dataAttr: true } },
+                        var configurableAttrs = { 'required': { schema: 'IsRequired' }, 'readonly': { schema: 'Readonly' }, 'min': { schema: 'Min' }, 'max': { schema: 'Max' }, 'maxlength': { schema: 'MaxLength' }, 'minlength': { schema: 'MinLength' }, 'parsleyPattern': { schema: 'Pattern', dataAttr: true }, 'inputmask': {}, 'inputmaskShowmaskonhover': {} },
                             configurableAttrsResult = '';
 
                         //#region setting that read from directive attribiute
@@ -3248,7 +3268,6 @@ angular
                             if (!model_schema) continue;
 
                             var dataAttr = (configurableAttrs[key].dataAttr) ? 'data-' : '';
-                            //if (key == 'inputmask' && configurableAttrs[key].schema in model_schema) debugger
 
                             configurableAttrs[key] = (configurableAttrs[key].schema in model_schema)
                                 ? dataAttr + camelToDash(key) + '=' + model_schema[configurableAttrs[key].schema]
@@ -3501,7 +3520,7 @@ angular
                 priority: 1500,
                 replace: true,
                 transclude: false,
-                templateUrl: "public/sn_open_modal.directive.html",
+                templateUrl: "client/core/directives/sn_open_modal.directive.html",
                 require: [],
                 scope: false,
                 controller: ['$scope', '$element', '$attrs', '$compile', 'share_module_config', "_", controller],
@@ -3625,7 +3644,7 @@ angular
                             //#region find required properties for invoke action
 
                             var required_properties_path = _.filter(_.report($scope.optionsAction.$$schema), function (item) {
-                                return item.path.indexOf('required') > 1;
+                                return item.path.indexOf('IsRequired') > 1;
                             })
                             var required_properties = _.map(required_properties_path, function (item) {
                                 var path = item.path.split('.');
@@ -3661,8 +3680,8 @@ angular
                         var formActionSchema = $scope.$$$api[parnet_actionPath.controllerName][parnet_actionPath.actionName].$$instance.$$schema;
                         required =
                             ((attrs.ngModel in formActionSchema)
-                                && ("required" in formActionSchema[attrs.ngModel])
-                                && formActionSchema[attrs.ngModel].required === true)
+                                && ("IsRequired" in formActionSchema[attrs.ngModel])
+                                && formActionSchema[attrs.ngModel].IsRequired === true)
                                     ? ' required '
                                     : '';
 
@@ -4012,7 +4031,7 @@ app
                         name: 'lazy_autosize',
                         files: [
                             'bower_components/autosize/dist/autosize.min.js',
-                            'public/angular-autosize.js'
+                            'public/client/modules/angular-autosize.js'
                         ],
                         serie: true
                     },
@@ -4020,7 +4039,7 @@ app
                         name: 'lazy_iCheck',
                         files: [
                             "bower_components/iCheck/icheck.min.js",
-                            'public/angular-icheck.js'
+                            'public/client/modules/angular-icheck.js'
                         ],
                         serie: true
                     },
@@ -4028,7 +4047,7 @@ app
                         name: 'lazy_selectizeJS',
                         files: [
                             'bower_components/selectize/dist/js/standalone/selectize.min.js',
-                            'public/angular-selectize.js'
+                            'public/client/modules/angular-selectize.js'
                         ],
                         serie: true
                     },
@@ -4036,7 +4055,7 @@ app
                         name: 'lazy_switchery',
                         files: [
                             'bower_components/switchery/dist/switchery.min.js',
-                            'public/angular-switchery.js'
+                            'public/client/modules/angular-switchery.js'
                         ],
                         serie: true
                     },
@@ -4044,7 +4063,7 @@ app
                         name: 'lazy_ionRangeSlider',
                         files: [
                             'bower_components/ion.rangeslider/js/ion.rangeSlider.min.js',
-                            'public/angular-ionRangeSlider.js'
+                            'public/client/modules/angular-ionRangeSlider.js'
                         ],
                         serie: true
                     },
@@ -4057,7 +4076,7 @@ app
                     {
                         name: 'lazy_character_counter',
                         files: [
-                            'public/angular-character-counter.js'
+                            'public/client/modules/angular-character-counter.js'
                         ]
                     },
                     {
@@ -4080,7 +4099,7 @@ app
                         name: 'lazy_ckeditor',
                         files: [
                             'bower_components/ckeditor/ckeditor.js',
-                            'public/angular-ckeditor.js'
+                            'public/client/modules/angular-ckeditor.js'
                         ],
                         serie: true
                     },
@@ -4088,7 +4107,7 @@ app
                         name: 'lazy_tinymce',
                         files: [
                             'bower_components/tinymce/tinymce.min.js',
-                            'public/angular-tinymce.js'
+                            'public/client/modules/angular-tinymce.js'
                         ],
                         serie: true
                     },
@@ -4099,7 +4118,7 @@ app
                         files: [
                             'bower_components/chartist/dist/chartist.min.css',
                             'bower_components/chartist/dist/chartist.min.js',
-                            'public/angular-chartist.js'
+                            'public/client/modules/angular-chartist.js'
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
@@ -4116,7 +4135,7 @@ app
                             'bower_components/metrics-graphics/dist/metricsgraphics.css',
                             'bower_components/d3/d3.min.js',
                             'bower_components/metrics-graphics/dist/metricsgraphics.min.js',
-                            'public/metrics-graphics.js'
+                            'public/client/metrics_graphics/directives/metrics-graphics.js'
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
@@ -4136,7 +4155,7 @@ app
                         name: 'lazy_charts_peity',
                         files: [
                             'bower_components/peity/jquery.peity.min.js',
-                            'public/angular-peity.js'
+                            'public/client/modules/angular-peity.js'
                         ],
                         serie: true
                     },
@@ -4146,7 +4165,7 @@ app
                         name: 'lazy_countUp',
                         files: [
                             'bower_components/countUp.js/dist/countUp.min.js',
-                            'public/angular-countUp.js'
+                            'public/client/modules/angular-countUp.js'
                         ],
                         serie: true
                     },
@@ -4181,7 +4200,7 @@ app
                             "bower_components/prism/prism.js",
                             "bower_components/prism/components/prism-php.js",
                             "bower_components/prism/plugins/line-numbers/prism-line-numbers.js",
-                            'public/angular-prism.js'
+                            'public/client/modules/angular-prism.js'
                         ],
                         serie: true
                     },
@@ -4231,7 +4250,7 @@ app
                             "bower_components/codemirror/mode/php/php.js",
                             "bower_components/codemirror/mode/clike/clike.js",
                             "bower_components/codemirror/mode/javascript/javascript.js",
-                            "public/angular-codemirror.js"
+                            "public/client/modules/angular-codemirror.js"
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
@@ -4385,7 +4404,7 @@ app
                         name: 'lazy_style_switcher',
                         files: [
                             "public/assets/css/style_switcher.min.css",
-                            "public/style_switcher.js"
+                            "public/client/style_switcher/style_switcher.js"
                         ],
                         insertBefore: '#main_stylesheet',
                     }

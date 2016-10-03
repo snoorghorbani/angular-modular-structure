@@ -107,5 +107,15 @@
     "metrics-graphics": "^2.9.0",
     "fullcalendar": "~2.6.1"
   },
-  "version": "2.7.3"
+  "version": "2.7.3",
+  "homepage": "https://github.com/snoorghorbani/angular-modular-structure",
+  "_release": "2.7.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.7.3",
+    "commit": "e604f14018cd5f4ec28977b2e6e29b29ebca2e7e"
+  },
+  "_source": "https://github.com/snoorghorbani/angular-modular-structure.git",
+  "_target": "^2.7.3",
+  "_originalSource": "angular-modular-structure"
 }
