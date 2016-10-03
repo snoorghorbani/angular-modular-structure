@@ -55,7 +55,7 @@ gulp.task('html_all', ['html_copy_to_public']);
 gulp.task('json_all', ['json_minify']);
 
 // -------------------- DEFAULT TASK ----------------------
-gulp.task('default', function (callback) {
+gulp.task('default', function (callback) { 
     return runSequence(
         ['js_all', 'html_all', 'json_all'],
         callback
