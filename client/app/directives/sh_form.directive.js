@@ -1,4 +1,5 @@
-﻿angular
+﻿;
+angular
     .module('share')
         .directive('shForm',
             ['$parse', function ($parse) {
@@ -78,6 +79,31 @@
                                         $scope.$apply();
                                     }
                                 });
+
+
+                            //#region AddNoteToRequest
+
+                            var AddNoteToRequest = $$$api.request.AddNoteToRequest.$init();
+                            $$$api.request.AddNoteToRequest.$promise
+                                .catch(function (respose) {
+                                    var requestId = respose.config.data.RequestId;
+
+                                    UIkit.notify({
+                                        message: ["یاداشت  برای درخواست", requestId, "ثبت گردید"].join(" "),
+                                        status: "success",
+                                        timeout: 1000,
+                                        pos: 'bottom-left',
+                                    })
+                                });
+
+                            $scope.$on('save new note', function () {
+                                debugger
+                                $scope.model.Note = $scope.model.NewNote;
+                                AddNoteToRequest.$update($scope.model);
+                                AddNoteToRequest.$invoke();
+                            })
+
+                            //#endregion
                         }],
 
                     link: function (scope, element, attrs, ctrl, transclude) {
@@ -102,4 +128,5 @@
                 };
 
                 return directive;
-            }]);
+            }])
+;

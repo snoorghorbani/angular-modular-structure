@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
     angular
         .module('app')
             .directive('fields', ['$compile', '$templateRequest', '_', function ($compile, $templateRequest, _) {
@@ -11,20 +11,20 @@
                                 var res = '';
                                 var fileds = dataIterator.get_row();
 
-                                res += '<form sh-form="request.FieldsOfRequest" data-model="dataModel">';
+                                res += '<form sh-form="request.ConfirmRequest" data-model="dataModel">';
 
                                 correct_schema(dataIterator);
                                 var arrayLikeModel = [];
-                                call_on_schema_item(dataIterator.schema, function (item, key) {
+                                call_on_schema_item(dataIterator.schema, function (item, key, path) {
                                     if (item.Hidden) return;
                                     if (item.Readonly) return;
                                     var template;
                                     var type = item.type;
-
+                                    debugger
                                     if (item.type == 'uploader') {
-                                        template =  '<ams:uploader></ams:uploader>';
+                                        template = '<ams:uploader></ams:uploader>';
                                     } else {
-                                        template = '<sh:input type=' + type + ' ng-model="' + key + '" data-i18n-path="common" />'
+                                        template = '<sh:input type=' + type + ' ng-model="' + path + '" data-i18n-path="common" />'
                                     }
 
 
@@ -40,13 +40,106 @@
 
                                 res += in_grid(arrayLikeModel);
 
-                                res += '<sh:input type="submit" class="_disabled" data-i18n="approve request" />\
-                                    <sh:input type="reset"  class="_disabled"  data-i18n="reject request" />';
+                                res += '<sh:input type="submit" data-i18n="approve request" />';
+                                //res += '<sh:input type="cancel"  class="_disabled"  data-i18n="reject request" ng-click="rejectRequest()"/>';
+
+                                res += '<button type="button" class="uk-modal-close md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button" ng-click="rejectRequest()" data-i18n="common.reject request"></button>';
+                                res += '<button type="button" class="uk-modal-close md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button" ng-click="addNoteToRequest()" data-i18n="common.submit note"></button>';
 
                                 res += '</form>';
 
                                 return res;
                             }
+                            var compile_view = function (response) {
+                                //set action schema from respose
+                                shape_schema_item(response.Result.RequestFields, function (item) {
+                                    _.each(item, function (value, key) {
+                                        item[(key[0].toLowerCase() + key.substr(1, key.lenght))] = value;
+                                        //delete item[key];
+                                        //delete item.ExtensionData;
+                                    });
+                                });
+
+
+                                //var res = shape_schema_item(response.Result.RequestFields, function (item, key) {
+                                //    item.Readonly = false;
+                                //    item.readonly = false;
+                                //    item.Hidden = false;
+                                //    item.hidden = false;
+                                //    return item;
+                                //})
+                                var res = shape_schema_item(response.Result.RequestFields, function (item, key) {
+                                    if (_.is.string(item.value) && item.value.search(/\/[Date()]+\d+[)]+\//) > -1) {
+                                        item.type = 'date';
+                                        return item;
+                                    }
+
+                                    if (_.is.string(item.value) && item.value.search(/\d+/) > -1) {
+                                        item.type = 'number';
+                                        return item;
+                                    }
+                                    if (key.toLowerCase() == "newnote") {
+                                        item.type = 'textarea';
+                                        item.width = 1;
+                                        return item;
+                                    }
+
+                                    if (_.is.array(item.Options)) {
+                                        item.type = 'select';
+                                        item.options = item.Options;
+                                        return item;
+                                    }
+
+                                    if (key.toLowerCase() == "newattachments") {
+                                        item.type = 'uploader';
+                                        item.width = 1;
+                                        return item;
+                                    }
+
+                                    item.type = "string";
+
+
+                                    if (_.is.string(item.value) && item.value.search(/\d+/) > -1) {
+                                        item.value = item.Value = parseInt(item.value);
+                                        return item;
+                                    }
+
+                                    return item;
+                                })
+
+                                //convert response data to directive structure
+                                //var data = $scope.data = convertFielsdToArray(response.model);
+                                //create iterator for manipulate and traverse on data
+                                var iterator = new fields_iterator(response.Result);
+
+                                $$$api.request.FieldsOfRequest.$$instance.__proto__.options.schema = response.Result.RequestFields;
+                                $$$api.request.FieldsOfRequest.$$instance.__proto__.$$schema = response.Result.RequestFields;
+
+
+                                $$$api.request.FieldsOfRequest.$$instance.$$$$deform_with_getter(iterator.model, response.Result.RequestFields);
+                                _.update(iterator.model, $$$api.request.FieldsOfRequest.$$instance);
+                                //use iterator and create template according to data 
+                                var template = build_template(iterator);
+
+                                $scope.dataModel = iterator.model;
+
+                                //#region compile html with scope
+                                template = angular.element(template);
+                                that.element.empty();
+                                that.element.append(template);
+                                debugger
+                                $compile(template)($scope);
+
+                                //#endregion
+
+
+                                //$scope.$root.$broadcast('uodate_flow_fields', response);
+                                $scope.$root.$broadcast('update_list_according_fields');
+
+                                //$scope.$root.$broadcast('update_list_according_fields', shape_to_list_model(iterator));
+                            }
+
+                            //#region inernal methods
 
                             var get_ordered_model = function (dataIterator) {
                                 //zz = _.sortBy(dataIterator.schema, 'number', 'data.order');
@@ -176,17 +269,24 @@
 
                                     return result;
                                 }
-                                var interperate = function (schema, name) {
-
+                                var interperate = function (schema, name, path) {
+                                    var paths = [];
+                                    path = path || "";
                                     if (isModelItemType(schema)) {
-                                        return fn(schema, name);
+                                        return fn(schema, name, path);
                                     }
                                     if (_.is.array(schema)) {
                                         var sample = schema[0] || new property_model;
-                                        return interperate(sample, name);
+                                        if (path != "") paths.push(path);
+                                        if (name != undefined) paths.push(name);
+
+                                        return interperate(sample, name, paths.join('.'));
                                     }
                                     for (var k in schema) {
-                                        interperate(schema[k], k);
+                                        paths = [];
+                                        if (path != "") paths.push(path);
+                                        if (k != undefined) paths.push(k);
+                                        interperate(schema[k], k, paths.join('.'));
                                     }
                                 }
 
@@ -207,87 +307,6 @@
                                 //return positions
                             }
                             var add_field = function (fieldSchema) { }
-
-                            var compile_view = function (response) {
-                                //set action schema from respose
-                                shape_schema_item(response.Result.RequestFields, function (item) {
-                                    _.each(item, function (value, key) {
-                                        item[(key[0].toLowerCase() + key.substr(1, key.lenght))] = value;
-                                        //delete item[key];
-                                        //delete item.ExtensionData;
-                                    });
-                                });
-
-
-                                var res = shape_schema_item(response.Result.RequestFields, function (item, key) {
-                                    if (_.is.string(item.value) && item.value.search(/\/[Date()]+\d+[)]+\//) > -1) {
-                                        item.type = 'date';
-                                        return item;
-                                    }
-
-                                    if (_.is.string(item.value) && item.value.search(/\d+/) > -1) {
-                                        item.type = 'number';
-                                        return item;
-                                    }
-                                    if (key.toLowerCase() == "newnote") {
-                                        item.type = 'textarea';
-                                        item.width = 1;
-                                        return item;
-                                    }
-
-                                    if (_.is.array(item.Options)) {
-                                        item.type = 'select';
-                                        item.options = item.Options;
-                                        return item;
-                                    }
-
-                                    if (key.toLowerCase() == "newattachments") {
-                                        item.type = 'uploader';
-                                        item.width = 1;
-                                        return item;
-                                    }
-
-                                    item.type = "string";
-
-
-                                    if (_.is.string(item.value) && item.value.search(/\d+/) > -1) {
-                                        item.value = item.Value = parseInt(item.value);
-                                        return item;
-                                    }
-
-                                    return item;
-                                })
-
-                                //convert response data to directive structure
-                                //var data = $scope.data = convertFielsdToArray(response.model);
-                                //create iterator for manipulate and traverse on data
-                                var iterator = new fields_iterator(response.Result);
-
-                                $$$api.request.FieldsOfRequest.$$instance.__proto__.options.schema = response.Result.RequestFields;
-                                $$$api.request.FieldsOfRequest.$$instance.__proto__.$$schema = response.Result.RequestFields;
-
-
-                                $$$api.request.FieldsOfRequest.$$instance.$$$$deform_with_getter(iterator.model, response.Result.RequestFields);
-                                _.update(iterator.model, $$$api.request.FieldsOfRequest.$$instance);
-                                //use iterator and create template according to data 
-                                var template = build_template(iterator);
-
-                                $scope.dataModel = iterator.model;
-
-                                //#region compile html with scope
-                                template = angular.element(template);
-                                that.element.empty();
-                                that.element.append(template);
-                                $compile(template)($scope);
-
-                                //#endregion
-
-
-                                //$scope.$root.$broadcast('uodate_flow_fields', response);
-                                $scope.$root.$broadcast('update_list_according_fields');
-
-                                //$scope.$root.$broadcast('update_list_according_fields', shape_to_list_model(iterator));
-                            }
                             var shape_to_list_model = function (dataIterator) {
                                 String.prototype.endsWith = function (suffix) {
                                     return this.indexOf(suffix, this.length - suffix.length) !== -1;
@@ -331,13 +350,25 @@
                                 return res;
                             }
 
+                            //#endregion
+
                             $$$api.request.FieldsOfRequest.$init(invoke_on_init = true);
                             $$$api.request.FieldsOfRequest
                                 .$promise
                                 .then(compile_view);
+                            debugger
+                            $scope.rejectRequest = function () {
+                                debugger
+                                $scope.$emit('request rejected', $scope.dataModel);
+                            };
+
+                            $scope.addNoteToRequest = function () {
+                                $scope.$broadcast('save new note')
+                            }
+
                         }];
 
-                var directive = {
+                return {
                     restrict: 'EA',
                     priority: 1500,
                     transclude: false,
@@ -352,8 +383,6 @@
                         }
                     }
                 }
-
-                return directive;
             }])
     ;
 

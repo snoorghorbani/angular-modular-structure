@@ -142,6 +142,7 @@ angular
                             var i18nPath = attrs.i18nPath || 'common',
                                 value = attrs.value,
                                 customClass = attrs.class || '',
+                                ngClick = (attrs.ngClick) ? " ng-click='" + attrs.ngClick + "' " : " ",
                                 type = get_type(),
                                 formId = getFormId(),
                                 model = getModel(),
@@ -256,7 +257,7 @@ angular
                                 var className = ("full" in attrs)
                                     ? " uk-modal-close md-btn md-btn-flat md-btn-mini md-btn-wave waves-effect waves-button " + customClass
                                     : " uk-modal-close md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button " + customClass;
-                                template = '<button type="button" class="' + className + '"\
+                                template = '<button type="button" class="' + className + ngClick + '"\
                                     id="' + formId + '-cancel"\
                                     data-i18n=\"' + i18n_name + '\" ></button>';
                             } else if (type == "submit") {
