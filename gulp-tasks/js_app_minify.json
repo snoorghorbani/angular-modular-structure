@@ -1,0 +1,7 @@
+﻿[
+  "public/assets/js/**/*.js",
+  "!public/assets/js/**/*.min.js",
+  "!public/assets/js/app.js",
+  "!public/assets/js/angular_common.js",
+  "!public/assets/js/common.js"
+]

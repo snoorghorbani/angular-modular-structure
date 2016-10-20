@@ -42,7 +42,7 @@ module.exports = {
             res.push(path);
             res.push(((isIgnorePath) ? '!' : '') + this.themePath + cleardPath);
         }
-
+			
         return res;
     },
 }

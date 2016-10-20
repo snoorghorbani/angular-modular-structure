@@ -73,3 +73,15 @@ gulp.task('js_copy_to_public', function () {
         .pipe(plugins.rename({ dirname: '' }))
         .pipe(gulp.dest('public/'));
 });
+
+gulp.task('js_app_minify', function () {
+    return gulp.src(global.getPath('js_app_minify'), { base: './' })
+        // .pipe(plugins.chmod(777))
+        // .pipe(plugins.uglify({
+        //     mangle: true
+        // }))
+        .pipe(plugins.rename({
+            extname: ".min.js"
+        }))
+        .pipe(gulp.dest('./'));
+});

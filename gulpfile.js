@@ -43,7 +43,7 @@ require('require-dir')('./bower_components/angular-modular-structure/gulp-tasks'
  */
 
 // -------------------- PROCESS ALL JS --------------------
-gulp.task('js_all', ['clean-scripts', 'js_angular_common', 'js_app', 'js_common', 'js_copy_to_public']);
+gulp.task('js_all', ['clean-scripts', 'js_angular_common', 'js_app', 'js_common', 'js_copy_to_public','js_app_minify']);
 
 // -------------------- PROCESS ALL LESS ------------------
 gulp.task('less_all', ['less_main', 'less_themes', 'less_my_theme']);

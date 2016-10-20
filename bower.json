@@ -44,7 +44,7 @@
     "clndr": "^1.4.1",
     "codemirror": "~5.13.4",
     "countUp.js": "^1.7.1",
-    "d3": "^3.5.17",
+    "d3": "^4.x.x",
     "datatables": "~1.10.11",
     "datatables-colvis": "~1.1.2",
     "datatables-tabletools": "~2.2.4",
@@ -95,10 +95,10 @@
     "ng-idle": "^1.2.0",
     "jquery.fancytree": "fancytree#^2.17.0",
     "angular-localization": "1.2.1",
-    "sutility": "*",
+    "sutility": "0.0.*",
     "angular-scopeManager": "*",
     "angular.apiGateway": "*",
-    "ngInfiniteScroll": "^1.2.2"
+    "ngInfiniteScroll": "1.2.2"
   },
   "resolutions": {
     "jquery": "~2.2.2",
@@ -107,5 +107,5 @@
     "metrics-graphics": "^2.9.0",
     "fullcalendar": "~2.6.1"
   },
-  "version": "2.8.0"
+  "version": "2.9.0"
 }

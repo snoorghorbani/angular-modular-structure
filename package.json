@@ -1,6 +1,6 @@
 {
   "name": "angular-modular-structure",
-  "version": "2.7.8",
+  "version": "2.9.0",
   "description": "Material Design Premium Admin Template",
   "main": "index.html",
   "scripts": {
@@ -14,8 +14,6 @@
     "angular js"
   ],
   "author": "tzd",
-  "license": "http://themeforest.net/licenses",
-  "homepage": "http://admin.tzdthemes.com",
   "private": true,
   "devDependencies": {
     "browser-sync": "^2.11.2",
@@ -44,6 +42,7 @@
     "express": "^4.14.0"
   },
   "dependencies": {
-    "sutility": "0.0.987"
+    "gulp-bower": "0.0.13",
+    "sutility": "0.0.*"
   }
 }
