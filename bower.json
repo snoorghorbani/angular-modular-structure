@@ -25,7 +25,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.3",
+    "angular": "^1.5.8",
     "angular-clndr": "^0.3.2",
     "angular-datatables": "^0.5.4",
     "angular-dragula": "~1.2.6",
@@ -100,12 +100,14 @@
     "angular.apiGateway": "*",
     "ngInfiniteScroll": "1.2.2"
   },
-  "resolutions": {
-    "jquery": "~2.2.2",
-    "fastclick": "~1.0.6",
-    "angular": "1.5.7",
-    "metrics-graphics": "^2.9.0",
-    "fullcalendar": "~2.6.1"
-  },
-  "version": "2.9.0"
+ "resolutions": {
+  "d3": "4.2.8",
+  "jquery": "~2.2.2",
+  "fastclick": "~1.0.6",
+  "angular": "1.5.8",
+  "metrics-graphics": "^2.9.0",
+  "fullcalendar": "~2.6.1",
+  "moment": "2.15.1"
+ },
+  "version": "2.9.1"
 }
