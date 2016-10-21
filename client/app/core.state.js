@@ -3,6 +3,6 @@ angular.module('restricted')
         function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider
                 .when('/dashboard', '/dashboard/main')
-                .otherwise('/my/cartable');
+                .otherwise('/dashboard/main');
         })
 ;
