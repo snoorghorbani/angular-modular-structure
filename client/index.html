@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="rtl" ng-app="app"  document-events ng-click="onClick($event)" ng-keyup="onKeyUp($event)" ng-class="{ 'page_loading': pageLoading, 'page_loaded': pageLoaded, 'app_initialized': appInitialized && (!$state.is('login') && !$state.includes('error'))}">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="public/assets/img/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="public/assets/img/favicon-32x32.png" sizes="32x32">
     <!-- uikit rtl -->
-    <link rel="stylesheet" href="public/assets/css/uikit.rtl.css" media="all"> 
+    <link rel="stylesheet" href="public/assets/css/uikit.rtl.css" media="all">
     <!-- flag icons -->
     <link rel="stylesheet" href="public/assets/icons/flags/flags.min.css" media="all">
     <!-- JS -->
@@ -59,4 +59,8 @@
     <div ui-view id="main_view" ng-class="{'uk-height-1-1': page_full_height }"></div>
     <div ui-view="main_sidebar" ng-hide="topMenuActive"></div>
 
+    <script id="__bs_script__">
+    //<![CDATA[
+        document.write("<script async src='http://HOST:54232/browser-sync/browser-sync-client.2.14.0.js'><\/script>".replace("HOST", location.hostname));
+    //]]></script>
 </body>
