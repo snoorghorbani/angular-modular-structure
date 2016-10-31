@@ -44,4 +44,3 @@ angular
         }
     ])
 ;
-angular.module('share').requires.push('ConsoleLogger');

@@ -77,6 +77,8 @@
                         template = '',
                         $id_debugger = (share_module_config.show_$id) ? "inside row{{$id}}" : '';
                         $scope.modelId = modelId;
+                        $scope.disable = true;
+
                         //#endregion
 
                         //#region config
@@ -98,7 +100,7 @@
                                 .$promise
                                 .then(function () {
                                     $scope.disable = false;
-                                })
+                                }, $scope.$id)
                             //.$update($scope.$parent.$parent.model);
 
                             //#region find required properties for invoke action
@@ -106,10 +108,16 @@
                             var required_properties_path = _.filter(_.report($scope.optionsAction.$$schema), function (item) {
                                 return item.path.indexOf('required') > 1;
                             })
+                            if (actionPath[1] == "CitiesOfProvince") debugger;
                             var required_properties = _.map(required_properties_path, function (item) {
                                 var path = item.path.split('.');
                                 path.pop();
+
+                                console.log($scope)
+                                if ($scope.optionsAction.$$schema[path] && $scope.optionsAction.$$schema[path].source)
+                                    path.unshift($scope.optionsAction.$$schema[path].source);
                                 path.unshift(PARENT_MODEL);
+
                                 return path.join('.');
                             });
                             if (required_properties.length > 0) {
@@ -120,7 +128,18 @@
 
                                         debugger;
                                         _.each(required_properties, function (item, idx) {
-                                            _.setValue($scope.optionsAction, new_value[idx], item.substr(6));
+                                            var lastPartOfPath = item.split('.').pop();
+                                                debugger
+                                            if ($scope.optionsAction.$$schema[lastPartOfPath] && $scope.optionsAction.$$schema[lastPartOfPath].source) {
+                                                var source = $scope.optionsAction.$$schema[lastPartOfPath].source;
+                                                var newPath = item.substr(6);
+                                                newPath = newPath.substr(source.length + 1);
+                                                _.setValue($scope.optionsAction, new_value[idx], newPath);
+                                            } else {
+                                                _.setValue($scope.optionsAction, new_value[idx], item.substr(6));
+                                            }
+
+
                                         });
 
                                         $scope.optionsAction.$invoke();
@@ -240,7 +259,6 @@
                                 //if (share_module_config.debug_mode) {
                                 //    console.log('select post')
                                 //}
-                                $scope.disable = true;
                             }
                         }
                     },

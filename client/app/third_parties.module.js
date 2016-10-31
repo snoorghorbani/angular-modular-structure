@@ -7,6 +7,7 @@
         'ngRetina',
         'ngLocalize',
         'ngLocalize.Config',
+        'ConsoleLogger',
         'infinite-scroll',
         'scopeManager',
         'sutility'

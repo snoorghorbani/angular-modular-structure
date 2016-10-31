@@ -45,7 +45,9 @@
 
                                 res += '<button type="button" class="uk-modal-close md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button" ng-click="rejectRequest()" data-i18n="common.reject request"></button>';
                                 res += '<button type="button" class="uk-modal-close md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button" ng-click="addNoteToRequest()" data-i18n="common.submit note"></button>';
-
+                                res += '<button type="button" class="uk-modal-close md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button" ng-click="attach_file()" data-i18n="common.attach"></button>';
+                                //res += "<div sn-open-modal data-modal-id='test'></div>";
+                                res += "<div id='test'></div>";
                                 res += '</form>';
 
                                 return res;
@@ -311,7 +313,7 @@
                                 String.prototype.endsWith = function (suffix) {
                                     return this.indexOf(suffix, this.length - suffix.length) !== -1;
                                 };
-                                var get_value = function (item) {
+                                var get_value = function (item, itemKey) {
                                     var haveCodeOrIdProperty = false;
                                     var res = item;
                                     _.each(item, function (value, key) {
@@ -325,8 +327,12 @@
                                         });
                                     } else {
                                         _.each(item, function (value, key) {
-                                            if (key.toLowerCase() == 'value' || key.toLowerCase() == 'amount' || key.toLowerCase() == 'fullname')
+                                            if (key.toLowerCase() == 'value' || key.toLowerCase() == 'fullname') {
                                                 res = value;
+                                            }
+                                            if (key.toLowerCase() == 'amount') {
+                                                res = value;
+                                            }
                                         });
                                     }
 
@@ -343,7 +349,7 @@
 
                                     res[key] = {
                                         name: key,
-                                        value: get_value(dataIterator.model[key]),
+                                        value: get_value(dataIterator.model[key],key),
                                     };
                                 });
 
@@ -364,6 +370,13 @@
 
                             $scope.addNoteToRequest = function () {
                                 $scope.$broadcast('save new note')
+                            }
+                            $scope.attach_file = function () {
+                                debugger;
+                                //UIkit.modal("#test").show();
+                                //$rootScope.secondarySidebarActive = true;
+                                $('#sidebar_secondary .uk-tab-grid >li').get(3).click();
+
                             }
 
                         }];

@@ -24,13 +24,13 @@ angular.module('dashboard')
 							], { serie: true });
 						}],
 						sale_chart_data: function($http){
-                            return $http({method: 'GET', url: 'public/data/mg_dashboard_chart.min.json'})
+                            return $http({method: 'GET', url: 'data/mg_dashboard_chart.min.json'})
                                 .then(function (data) {
                                     return data.data;
                                 });
                         },
                         user_data: function($http){
-                            return $http({ method: 'GET', url: 'public/data/user_data.json' })
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
                                 .then(function (data) {
                                     return data.data;
                                 });
