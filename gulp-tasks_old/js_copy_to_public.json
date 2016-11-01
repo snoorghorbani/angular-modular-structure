@@ -1,0 +1,27 @@
+[
+  "client/*.js",
+  "client/**/*.js",
+
+  "!**/*.module.js",
+  "!**/*.provider.js",
+  "!**/*.module_config.js",
+  "!**/*.state.js",
+  "!**/*.menu.js",
+  "!**/*.api.js",
+
+  "!client/app/factories/*.js",
+  "!client/app/modules/*.js",
+  "!client/app/services/*.js",
+  "!client/app/directives/*.js",
+  "!client/app/filters/*.js",
+  "!client/app/controllers/*.js",
+
+  "!client/main_sidebar/main_sidebar_menu.service.js",
+  "!client/main_sidebar/main_sidebar.controller.js",
+  "!client/header/main_header.controller.js",
+
+  "!client/app.oc_lazy_load.js",
+
+  "!client/**/*.min.js",
+  "!client/*.min.js"
+]
