@@ -10,6 +10,7 @@
         'ConsoleLogger',
         'infinite-scroll',
         'scopeManager',
+        'ngFileUpload',
         'sutility'
     ])
     .value('values', {})

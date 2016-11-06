@@ -418,7 +418,7 @@ app
                         insertBefore: '#main_stylesheet',
                     }
 
-                ]
+                ] 
             })
         }
     ]);

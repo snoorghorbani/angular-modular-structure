@@ -29,9 +29,11 @@ gulp.task('serve', ['default'], function () {
 
     //#region js
 
-    gulp.watch(global.getPath('js_common'), ['js_common' , 'reload']);
+    gulp.watch(global.getPath('js_common'), ['js_common', 'reload']);
     gulp.watch(global.getPath('js_angular_common'), ['js_angular_common', 'reload']);
-    gulp.watch(global.getPath('js_app'), ['js_app', 'reload']);
+    gulp.watch(global.getPath('js_app'), ['js_app'], function () {
+        bs_angular.reload();
+    });
     gulp.watch(global.getPath('js_copy_to_public'), ['js_copy_to_public', 'reload']);
     //gulp
     //    .watch(['public/assets/js/angular_common.js',

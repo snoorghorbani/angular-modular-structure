@@ -20,7 +20,7 @@
                                     if (item.Readonly) return;
                                     var template;
                                     var type = item.type;
-                                    debugger
+
                                     if (item.type == 'uploader') {
                                         template = '<ams:uploader></ams:uploader>';
                                     } else {
@@ -129,7 +129,6 @@
                                 template = angular.element(template);
                                 that.element.empty();
                                 that.element.append(template);
-                                debugger
                                 $compile(template)($scope);
 
                                 //#endregion
@@ -362,9 +361,7 @@
                             $$$api.request.FieldsOfRequest
                                 .$promise
                                 .then(compile_view);
-                            debugger
                             $scope.rejectRequest = function () {
-                                debugger
                                 $scope.$emit('request rejected', $scope.dataModel);
                             };
 
@@ -372,7 +369,6 @@
                                 $scope.$broadcast('save new note')
                             }
                             $scope.attach_file = function () {
-                                debugger;
                                 //UIkit.modal("#test").show();
                                 //$rootScope.secondarySidebarActive = true;
                                 $('#sidebar_secondary .uk-tab-grid >li').get(3).click();

@@ -30,34 +30,34 @@ angular
                     Selectize.defaults.maxItems = null; //default to tag editor
                     Selectize.defaults.hideSelected = true;
 
-                    if(attrs.position) {
+                    if (attrs.position) {
                         scope.posBottom = attrs.position;
                     }
 
-                    Selectize.defaults.onDropdownOpen = function($dropdown) {
+                    Selectize.defaults.onDropdownOpen = function ($dropdown) {
                         $dropdown
                             .hide()
                             .velocity('slideDown', {
-                                begin: function() {
+                                begin: function () {
                                     if (typeof scope.posBottom !== 'undefined') {
-                                        $dropdown.css({'margin-top':'0'})
+                                        $dropdown.css({ 'margin-top': '0' })
                                     }
                                 },
                                 duration: 200,
-                                easing: [ 0.4,0,0.2,1 ]
+                                easing: [0.4, 0, 0.2, 1]
                             })
                     };
-                    Selectize.defaults.onDropdownClose = function($dropdown) {
+                    Selectize.defaults.onDropdownClose = function ($dropdown) {
                         $dropdown
                             .show()
                             .velocity('slideUp', {
-                                complete: function() {
+                                complete: function () {
                                     if (typeof posBottom !== 'undefined') {
-                                        $dropdown.css({'margin-top': ''})
+                                        $dropdown.css({ 'margin-top': '' })
                                     }
                                 },
                                 duration: 200,
-                                easing: [ 0.4,0,0.2,1 ]
+                                easing: [0.4, 0, 0.2, 1]
                             });
                     };
 
@@ -145,7 +145,7 @@ angular
                     // need to create the corresponding options for the items to be visible
                     //scope.options = generateOptions((scope.options || config.options || scope.ngModel).slice());
 
-                    scope.generatedOptions = generateOptions( (scope.options || config.options || scope.ngModel).slice() );
+                    scope.generatedOptions = generateOptions((scope.options || config.options || scope.ngModel).slice());
                     scope.options.length = 0;
                     scope.generatedOptions.forEach(function (item) {
                         scope.options.push(item);
@@ -166,8 +166,9 @@ angular
                             angularCallback(selectize);
                         }
 
-                        scope.$watch('options', function () {
-                            scope.generatedOptions = generateOptions( (scope.options || config.options || scope.ngModel).slice() );
+                        scope.$watch('options', function (nv, ov) {
+                            if (!nv) { return }
+                            scope.generatedOptions = generateOptions((scope.options || config.options || scope.ngModel).slice());
                             scope.options.length = 0;
                             scope.generatedOptions.forEach(function (item) {
                                 scope.options.push(item);
@@ -199,76 +200,76 @@ angular
         }
     ]);
 
-    // tooltip
-    Selectize.define('tooltip', function (options) {
-        var self = this;
-        this.setup = (function () {
-            var original = self.setup;
-            return function () {
-                original.apply(this, arguments);
-                var $wrapper = this.$wrapper,
-                    $input = this.$input;
-                if ($input.attr('title')) {
-                    $wrapper
-                        .attr('title', $input.attr('title'))
-                        .attr('data-uk-tooltip', $input.attr('data-uk-tooltip'));
-                }
-            };
-        })();
-    });
+// tooltip
+Selectize.define('tooltip', function (options) {
+    var self = this;
+    this.setup = (function () {
+        var original = self.setup;
+        return function () {
+            original.apply(this, arguments);
+            var $wrapper = this.$wrapper,
+                $input = this.$input;
+            if ($input.attr('title')) {
+                $wrapper
+                    .attr('title', $input.attr('title'))
+                    .attr('data-uk-tooltip', $input.attr('data-uk-tooltip'));
+            }
+        };
+    })();
+});
 
-    // disable option
-    // https://github.com/mondorobot/selectize-disable-options
-    Selectize.define('disable_options', function(options) {
-        var self = this;
+// disable option
+// https://github.com/mondorobot/selectize-disable-options
+Selectize.define('disable_options', function (options) {
+    var self = this;
 
-        options = $.extend({
-            'disableOptions': []
-        }, options);
+    options = $.extend({
+        'disableOptions': []
+    }, options);
 
-        self.onFocus = (function() {
-            var original = self.onFocus;
+    self.onFocus = (function () {
+        var original = self.onFocus;
 
-            return function() {
-                original.apply(this, arguments);
+        return function () {
+            original.apply(this, arguments);
 
-                $.each(options.disableOptions, function(index, option) {
-                    self.$dropdown_content.find('[data-value="' + String(option) + '"]').addClass('option-disabled');
-                });
-            };
-        })();
+            $.each(options.disableOptions, function (index, option) {
+                self.$dropdown_content.find('[data-value="' + String(option) + '"]').addClass('option-disabled');
+            });
+        };
+    })();
 
-        self.onOptionSelect = (function() {
-            var original = self.onOptionSelect;
+    self.onOptionSelect = (function () {
+        var original = self.onOptionSelect;
 
-            return function(e) {
-                var value, $target, $option;
+        return function (e) {
+            var value, $target, $option;
 
-                if (e.preventDefault) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
+            if (e.preventDefault) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
 
-                $target = $(e.currentTarget);
+            $target = $(e.currentTarget);
 
-                if ($target.hasClass('option-disabled')) {
-                    return;
-                } else if ($target.hasClass('create')) {
-                    self.createItem();
-                } else {
-                    value = $target.attr('data-value');
-                    if (value) {
-                        self.lastQuery = null;
-                        self.setTextboxValue('');
-                        self.addItem(value);
-                        if (!self.settings.hideSelected && e.type && /mouse/.test(e.type)) {
-                            self.setActiveOption(self.getOption(value));
-                        }
+            if ($target.hasClass('option-disabled')) {
+                return;
+            } else if ($target.hasClass('create')) {
+                self.createItem();
+            } else {
+                value = $target.attr('data-value');
+                if (value) {
+                    self.lastQuery = null;
+                    self.setTextboxValue('');
+                    self.addItem(value);
+                    if (!self.settings.hideSelected && e.type && /mouse/.test(e.type)) {
+                        self.setActiveOption(self.getOption(value));
                     }
-
-                    self.blur();
                 }
-                return original.apply(this, arguments);
-            };
-        })();
-    });
+
+                self.blur();
+            }
+            return original.apply(this, arguments);
+        };
+    })();
+});

@@ -19,7 +19,7 @@ angular
                     "PageSize": {
                         "type": "number",
                         "required": true,
-                        "default": 5
+                        "default": 15
                     }
                 },
                 "SortingInfo": {

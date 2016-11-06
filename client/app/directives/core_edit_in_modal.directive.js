@@ -6,7 +6,6 @@ angular
             var pre = function ($scope, element, attrs, ctrls, $transclude) { };
             var post = function ($scope, element, attrs, ctrls, $transclude) {
                 var that = this;
-                debugger;
 
                 if (attrs.action.indexOf('.') != -1) {
                     var actionDefinition = {
@@ -23,7 +22,6 @@ angular
                     that.saveAction.$update(res.Result);
                 });
                 element.on('click', function () {
-                    debugger
                     that.action.$update($scope.item).$invoke();
                     $scope.$apply();
                     UIkit.modal("#" + attrs.modal).show();

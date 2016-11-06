@@ -8,7 +8,9 @@
   "bower_components/angular-resource/angular-resource.min.js",
   "bower_components/angular-localization/angular-localization.min.js",
   "bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
+  "bower_components/ng-file-upload/ng-file-upload.js",
   "bower_components/angular.apiGateway/dist/angular.apiGateway.js",
   "bower_components/angular-scopeManager/dist/angular-scopeManager.js",
-  "bower_components/sutility/dist/sutility.angular.js"
+  "bower_components/sutility/dist/sutility.angular.js",
+  "ts/Gateway/Gateway.js"
 ]
